@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <map>
 #include "createUser.h"
 
 createUser::createUser()
@@ -13,20 +14,32 @@ createUser::createUser()
 	std::cout << username << " and " << password << std::endl;
 }
 
+bool createUser::check_username()
+{
+	//std::ifstream ofs_check_username;
+	//ofs_check_username.open("./UserPass.txt");
+
+	return true;
+}
 void createUser::encode(std::string user,std::string paswd)
 {
 	username = user;
 	password = paswd;
-	int tempnum;
+	int tempnum = 0;
 	int fortimes = 0;
 	std::cout << user << " and " <<paswd<< std::endl;
+	offset = 0;
+	counter = 0;
 
 	for (auto chr : password)
 	{
-		offset = 0;
-		counter = 0;
+		
 		tempnum=charTransferInt(chr);//将每个字符char转换为Ascii码
+		//newcastle computing 15:00--14/10/2021
+		tempnum = tempnum + offset;
+		//end
 		collatz(tempnum);//传入Ascii码，计算出到1的步骤counter
+		/*
 		if (fortimes== 0)
 		{
 			offset = 0;	
@@ -34,12 +47,15 @@ void createUser::encode(std::string user,std::string paswd)
 		else 
 		{
 			offset = offset + counter;//collatz得出的步数加到字符的offset上
-		}
-		tempnum = tempnum + offset;//Ascii码加offset得到最终加密数字
+		}*/
+
+		//tempnum = tempnum + offset;//Ascii码加offset得到最终加密数字
 		
-		pass = std::to_string(tempnum);//将最终加密数字转为string类型
+
+		pass = std::to_string(counter);//将最终加密数字转为string类型
 		*allpass = *allpass + pass;//将每个加密后的字符串联为一个长字符串
-		fortimes++;
+		offset = counter;
+		//fortimes++;
 		std::cout << *allpass << std::endl;
 	}
 	
@@ -70,16 +86,13 @@ int createUser::calcu(int i)
 		return i;
 
 	if (i % 2 == 0)
-	{
 		return i / 2;
-	}
 	else
-	{
 		return 3 * i + 1;
-	}
 }
 void createUser::collatz(int singlecha)
 {
+	counter = 0;
 	while (singlecha !=1)
 	{
 		singlecha = calcu(singlecha);
@@ -89,6 +102,8 @@ void createUser::collatz(int singlecha)
 }
 bool createUser::save_txt()
 {
+	//std::map<std::string, std::string>username_and_password;
+
 	//将username and allpass写入文件txt
 	std::fstream ofs_write;
 	ofs_write.open("./UserPass.txt", std::ios::app);

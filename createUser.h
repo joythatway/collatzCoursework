@@ -11,6 +11,7 @@ public:
 	void collatz(int singlecha);
 	void encode(std::string user,std::string paswd);
 	bool save_txt();
+	bool check_username();
 
 private:
 	std::string username;

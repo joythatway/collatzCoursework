@@ -21,7 +21,12 @@ void function1()//14/10/2021-14:43--14:45
 
 void function2()
 {
-
+	string check_username;
+	string check_password;
+	cout<<"please input your username:" << endl;
+	cin >> check_username;
+	cout << "please input password:" << endl;
+	cin >> check_password;
 }
 void function3()
 {
@@ -50,10 +55,6 @@ int main()
 		cout << "please input valid number !" << endl;
 
 	}
-
-
-
-
 
 
 }

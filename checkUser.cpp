@@ -1,9 +1,11 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <istream>
 #include <vector>
 #include <iterator>
 #include <string>
+#include <sstream>
 #include "checkUser.h"
 #include "createUser.h"
 
@@ -24,12 +26,14 @@ void check_user_pass::open_file()
 }
 void check_user_pass::close_file()
 {
-	if (cpwd)
+	if (cpwd.is_open())
 	{
 		cpwd.close();
 		std::cout << "close the file !" << std::endl;
-	}else
+	}
+	else {
 		std::cout << "the file has already close !" << std::endl;
+	}
 }
 
 //std::vector<std::string> split(const std::string& str, const std::string& delim) {
@@ -55,7 +59,7 @@ void check_user_pass::check(std::string user, std::string pwd)
 {
 	open_file();
 	//m_pwd;
-
+/*
 	while (!cpwd.eof())
 	{
 		std::string temp;
@@ -71,10 +75,61 @@ void check_user_pass::check(std::string user, std::string pwd)
 	{
 		std::cout << itr->second << std::endl;
 	}
-	
-	
+*/	
+	std::string username_from_user;
+	std::string password_from_user;
+	std::string all;
+	std::string oneline;
+	std::string username;
+	std::string password;
+	char delim = ' ';
+	int getline_counter = 0;
+	//using getoneline = std::istream& getline(std::istream & is, std::string & all, char space = ' ');
+	//std::istream& getline(std::istream& is,std::string &all, char space=' ');
+	//std::cout <<  << std::endl;
+	if (cpwd.is_open())
+	{
+		while (getline(cpwd, all,'\n'))
+		{
+			std::cout << all << std::endl;
+			getline_counter++;
+			std::cout << getline_counter<<std::endl;
+			oneline = all;
+			std::cout << "oneline is :" << oneline << std::endl;
 
+			username = "";
+			password = "";
+			for (auto& split : oneline)
+			{
+				if (split == ' ')
+				{
+					password = password + (&split+1);
+					//std::cout << password << std::endl;
+				}
+			}
+			for (auto& split1 : oneline)
+			{
+				if (split1 == ' ')
+				{
+					break;
+					//std::cout << password << std::endl;
+				}
+				username = username + split1;
+			}
+			std::cout << "username is :"<<username << std::endl;
+			std::cout << "password is :"<<password << std::endl;
+			//use map.insert to add username to map
+			// and try to use string = allstring-string
 
+			//std::stringstream ss(all);
+			//while (getline(ss, oneline,'\n'))
+			//{
+				
+			//	std::cout << oneline << std::endl;
+			//}
+		}
+		
+	}
 
 	close_file();
 }

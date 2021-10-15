@@ -10,7 +10,7 @@ public:
 	int calcu(int i);
 	void collatz(int singlecha);
 	void encode(std::string user,std::string paswd);
-	bool save_txt();
+	void save_txt();
 	bool check_username();
 
 private:

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checkUser.cpp" />
     <ClCompile Include="createUser.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

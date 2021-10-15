@@ -58,11 +58,11 @@ void createUser::encode(std::string user,std::string paswd)
 		//fortimes++;
 		std::cout << *allpass << std::endl;
 	}
-	
-	if (save_txt())
-		std::cout << "complete encode." << std::endl;
-	else
-		std::cout << "encode error..." << std::endl;
+	save_txt();
+	//if (save_txt())
+	//	std::cout << "complete encode." << std::endl;
+	//else
+	//	std::cout << "encode error..." << std::endl;
 	
 }
 int createUser::charTransferInt(char cha)
@@ -98,20 +98,33 @@ void createUser::collatz(int singlecha)
 		singlecha = calcu(singlecha);
 		counter++;
 	}
-	
 }
-bool createUser::save_txt()
+void createUser::save_txt()
 {
-	//std::map<std::string, std::string>username_and_password;
+	std::map<std::string, std::string>createMap;
 
 	//将username and allpass写入文件txt
 	std::fstream ofs_write;
+	
 	ofs_write.open("./UserPass.txt", std::ios::app);
-	ofs_write << username << " " << *allpass << '\n';
 
-	ofs_write.close();
-
-
-
-	return true;
+	if (ofs_write)
+	{
+		//ofs_write << username << " " << *allpass << '\n';
+			
+		createMap.insert(std::pair<std::string, std::string>(username, *allpass));
+		std::map<std::string, std::string>::iterator iter;
+		for (iter = createMap.begin(); iter != createMap.end(); iter++) {
+				ofs_write << iter->first << ' ' << iter->second << std::endl;
+			//std::cout << iter->first << ' ' << iter->second << endl;
+		}
+	
+		ofs_write.close();
+		std::cout << "finished writing ..." << std::endl;
+	}
+	else 
+	{
+		std::cout << "open file error !" << std::endl;
+	}
+	//return true;
 }

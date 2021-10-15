@@ -19,14 +19,20 @@ void function1()//14/10/2021-14:43--14:45
 
 }
 
-void function2()
+void function2()//check-username-password
 {
+	check_user_pass* check_pwd = new check_user_pass;
 	string check_username;
 	string check_password;
 	cout<<"please input your username:" << endl;
 	cin >> check_username;
 	cout << "please input password:" << endl;
 	cin >> check_password;
+	//写一个入口函数，传递用户名和密码开始处理
+	check_pwd->check(check_username, check_password);
+
+
+
 }
 void function3()
 {

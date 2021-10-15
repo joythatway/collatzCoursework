@@ -21,6 +21,9 @@
     <ClCompile Include="createUser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="checkUser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="createUser.h">

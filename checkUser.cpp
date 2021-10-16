@@ -16,66 +16,40 @@ check_user_pass::check_user_pass()//construction function
 	c_password = "";
 
 }
-void check_user_pass::open_file()
+bool check_user_pass::open_file()
 {
 	cpwd.open("./UserPass.txt",std::ios::in);
-	if (cpwd)
-		std::cout << "open successed !" << std::endl;
-	else
-		std::cout << "open faild !" << std::endl;
+	if (cpwd.is_open()) {
+		//std::cout << "open file successed !" << std::endl;
+		return true;
+	}else {
+		//std::cout << "open faild,file may lost !" << std::endl;
+		return false;
+	}
+		
+	
 }
 void check_user_pass::close_file()
 {
 	if (cpwd.is_open())
 	{
 		cpwd.close();
-		std::cout << "close the file !" << std::endl;
+		//std::cout << "close the file !" << std::endl;
 	}
 	else {
-		std::cout << "the file has already close !" << std::endl;
+		//std::cout << "the file has already close !" << std::endl;
 	}
 }
 
-//std::vector<std::string> split(const std::string& str, const std::string& delim) {
-//	std::vector<std::string> res;
-//	if ("" == str) return res;
-//	//先将要切割的字符串从string类型转换为char*类型
-//	char* strs = new char[str.length() + 1];
-//	std::strcpy(strs, str.c_str());
-//
-//	char* d = new char[delim.length() + 1];
-//	strcpy(d, delim.c_str());
-//
-//	char* p = strtok(strs, d);
-//	while (p) {
-//		std::string s = p;  //分割得到的字符串转换为string类型
-//		res.push_back(s); //存入结果数组
-//		p = strtok(NULL, d);
-//	}
-//	return res;
-//}
 
 void check_user_pass::check(std::string user, std::string pwd)
 {
 	open_file();
 	//m_pwd;
-/*
-	while (!cpwd.eof())
-	{
-		std::string temp;
-		cpwd >> temp;
-		std::vector<std::string> tempstr;// = split(temp, " ");
-		std::string key_user = tempstr[0].c_str();
-		std::string value_pass = tempstr[1].c_str();
+	//调用collatz函数计算加密后的密码，并赋给c_password;
+	input_username = user;
+	input_password = encoding(pwd);
 
-		m_pwd.insert(make_pair(key_user, value_pass));
-	}
-	std::map<std::string, std::string> ::iterator itr;
-	for (itr = m_pwd.begin(); itr != m_pwd.end(); itr++)
-	{
-		std::cout << itr->second << std::endl;
-	}
-*/	
 	std::string username_from_user;
 	std::string password_from_user;
 	std::string all;
@@ -91,11 +65,11 @@ void check_user_pass::check(std::string user, std::string pwd)
 	{
 		while (getline(cpwd, all,'\n'))
 		{
-			std::cout << all << std::endl;
+			//std::cout << all << std::endl;
 			getline_counter++;
-			std::cout << getline_counter<<std::endl;
+			//std::cout << getline_counter<<std::endl;
 			oneline = all;
-			std::cout << "oneline is :" << oneline << std::endl;
+			//std::cout << "oneline is :" << oneline << std::endl;
 
 			username = "";
 			password = "";
@@ -116,17 +90,42 @@ void check_user_pass::check(std::string user, std::string pwd)
 				}
 				username = username + split1;
 			}
-			std::cout << "username is :"<<username << std::endl;
-			std::cout << "password is :"<<password << std::endl;
-			//use map.insert to add username to map
-			// and try to use string = allstring-string
+			//std::cout << "username is :"<<username << std::endl;
+			//std::cout << "password is :"<<password << std::endl;
 
-			//std::stringstream ss(all);
-			//while (getline(ss, oneline,'\n'))
-			//{
+			/*if (user != username)
+			{
+				std::cout << "no username exist !" << std::endl;
+			}
+			else if (user == username)
+			{
+				for (int i = 0; i < changce; i++)
+				{
+					if (pwd == password)
+					{
+						std::cout << "success !" << std::endl;
+					}
+					else if (pwd != password)
+					{
+						std::cout << "failed ！" << std::endl;
+						i++;
+					}
 				
-			//	std::cout << oneline << std::endl;
-			//}
+				}
+			}*/
+
+			if (username == user)
+			{
+				txt_username = username;
+				txt_password = password;
+				break;
+			}
+			/*else if (username != user)
+			{
+				txt_username ="";
+				txt_password = "";
+				std::cout << "not match !" << std::endl;
+			}*/
 		}
 		
 	}

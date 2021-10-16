@@ -11,7 +11,7 @@ createUser::createUser()
 	createUser::pass = "";
 	createUser::allpass = new std::string;
 
-	std::cout << username << " and " << password << std::endl;
+	//std::cout << username << " and " << password << std::endl;
 }
 
 bool createUser::check_username()
@@ -32,38 +32,38 @@ void createUser::encode(std::string user,std::string paswd)
 	counter = 0;
 
 	for (auto chr : password)
-	{
-		
-		tempnum=charTransferInt(chr);//将每个字符char转换为Ascii码
-		//newcastle computing 15:00--14/10/2021
-		tempnum = tempnum + offset;
-		//end
-		collatz(tempnum);//传入Ascii码，计算出到1的步骤counter
-		/*
-		if (fortimes== 0)
-		{
-			offset = 0;	
-		}
-		else 
-		{
-			offset = offset + counter;//collatz得出的步数加到字符的offset上
-		}*/
-
-		//tempnum = tempnum + offset;//Ascii码加offset得到最终加密数字
-		
-
+	{		
+		tempnum=charTransferInt(chr);//将每个字符char转换为Ascii码		
+		tempnum = tempnum + offset;		
+		collatz(tempnum);//传入Ascii码，计算出到1的步骤counter				
 		pass = std::to_string(counter);//将最终加密数字转为string类型
 		*allpass = *allpass + pass;//将每个加密后的字符串联为一个长字符串
-		offset = counter;
-		//fortimes++;
+		offset = counter;		
 		std::cout << *allpass << std::endl;
 	}
-	save_txt();
-	//if (save_txt())
-	//	std::cout << "complete encode." << std::endl;
-	//else
-	//	std::cout << "encode error..." << std::endl;
-	
+	save_txt();		
+}
+std::string createUser::encoding(std::string paswod)
+{
+	password = paswod;
+	std::string finished_password;
+	int tempnum = 0;
+	int fortimes = 0;
+	//std::cout << " encoding pwd : " << paswod << std::endl;
+	offset = 0;
+	counter = 0;
+
+	for (auto chr : password)
+	{
+		tempnum = charTransferInt(chr);//将每个字符char转换为Ascii码		
+		tempnum = tempnum + offset;
+		//传入Ascii码，计算出到1的步骤counter				
+		pass = std::to_string(collatz(tempnum));//将最终加密数字转为string类型
+		finished_password = finished_password + pass;//将每个加密后的字符串联为一个长字符串
+		offset = counter;
+		//std::cout << finished_password << std::endl;
+	}
+	return finished_password;
 }
 int createUser::charTransferInt(char cha)
 {
@@ -90,7 +90,7 @@ int createUser::calcu(int i)
 	else
 		return 3 * i + 1;
 }
-void createUser::collatz(int singlecha)
+int createUser::collatz(int singlecha)
 {
 	counter = 0;
 	while (singlecha !=1)
@@ -98,6 +98,7 @@ void createUser::collatz(int singlecha)
 		singlecha = calcu(singlecha);
 		counter++;
 	}
+	return counter;
 }
 void createUser::save_txt()
 {

@@ -13,6 +13,8 @@ void function1()//14/10/2021-14:43--14:45
 	createUser* crtUser = new createUser;
 	cout << "please input your username:" << endl;
 	cin >> uName;
+	//check the username if it exist
+
 	cout << "please input your password:" << endl;
 	cin >> pwd;
 	crtUser->encode(uName, pwd);
@@ -24,15 +26,42 @@ void function2()//check-username-password
 	check_user_pass* check_pwd = new check_user_pass;
 	string check_username;
 	string check_password;
+	int i = 3;
+	
 	cout<<"please input your username:" << endl;
 	cin >> check_username;
 	cout << "please input password:" << endl;
 	cin >> check_password;
 	//写一个入口函数，传递用户名和密码开始处理
-	check_pwd->check(check_username, check_password);
+	check_pwd->check(check_username, check_password);//match username and password from txt to txt_user_password;
 
+	check_password = check_pwd->encoding(check_password);
 
+	if (check_username == check_pwd->txt_username)
+	{
+		for (i = 3; i >= 0; i--)
+		{
+			if (check_password==check_pwd->txt_password)
+			{
+				std::cout << "success !" << std::endl;
+				break;
+			}
+			else if (check_pwd->txt_password != check_password&&i!=0)
+			{
+				std::cout << "not match pwd, ";
+				std::cout << "you have " << i << " opportunitiy, ";
+				std::cout << "please reinput your password :";
+				cin >> check_password;
+				check_password = check_pwd->encoding(check_password);
+			}
+		}
+	}else
+	{
+		std::cout << "failure" << std::endl;
+	}
 
+	if (i < 0)
+		std::cout << "you run out of all chance !!" << std::endl;
 }
 void function3()
 {

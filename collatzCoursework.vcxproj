@@ -142,6 +142,7 @@
     <ClCompile Include="checkUser.cpp" />
     <ClCompile Include="createUser.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="randomCode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="checkUser.h" />

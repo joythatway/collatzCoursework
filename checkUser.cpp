@@ -23,7 +23,7 @@ bool check_user_pass::open_file()
 		//std::cout << "open file successed !" << std::endl;
 		return true;
 	}else {
-		//std::cout << "open faild,file may lost !" << std::endl;
+		std::cout << "open faild,file may lost !" << std::endl;
 		return false;
 	}
 		

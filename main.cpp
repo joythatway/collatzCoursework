@@ -63,9 +63,19 @@ void function2()//check-username-password
 	if (i < 0)
 		std::cout << "you run out of all chance !!" << std::endl;
 }
-void function3()
+void function3()//generate passcode
 {
-
+	randomCode* generater = new randomCode;
+	char chioce;
+	cout << "please input y or n if you want to generate passcode.." << endl;
+	cin >> chioce;
+	switch (chioce)
+	{
+	case 'y':generater->generate_passcode(); break;
+	case 'n':break;
+	default:cout << "please use y and n " << endl;
+		break;
+	}
 }
 void function4()
 {

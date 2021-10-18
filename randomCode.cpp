@@ -2,7 +2,7 @@
 #include <random>
 #include <vector>
 #include <string>
-#include <ranges>
+//#include <ranges>
 #include <fstream>
 #include <sstream>
 #include <iterator>
@@ -88,23 +88,24 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 		s_vector.push_back(i);
 	}
 	std::random_shuffle(s_vector.begin(), s_vector.end());*/
-
+	
 	
 	for (i = 1; i <= 100; i++)//1-100, 101-200, 201-300 ...¼¸°Ù
 	{
+		std::cout << "------------------ " <<"the " << i << "  hunders" << std::endl;
 		for (y = 1; y <= 100; y++)//1,2,3...---101,102,103...---201,202,203...
 		{
 			//std::random_shuffle(s_vector.begin(), s_vector.end());
 			string_two = "";
 			str = "";
-			for (iv = 32; iv <= 126; iv++)
-				{
-					s_vector.push_back(iv);
-				}
-			std::random_shuffle(s_vector.begin(), s_vector.end());
-			s_vector.resize(x);//??????
-			for (x = 1; x <= i; x++)//length 1--2--3 ...
+			for (iv = 32; iv <= 132; iv++)
 			{
+				s_vector.push_back(iv);
+			}
+			std::random_shuffle(s_vector.begin(), s_vector.end());
+			s_vector.resize(i);// use i
+			//for (x = 1; x <= i; x++)//length 1--2--3 ...
+			//{
 				/*std::vector<int>::const_iterator First = s_vector.begin();
 				std::vector<int>::const_iterator End = s_vector.begin()+x;
 				s_vector.assign(First, End);*/
@@ -120,16 +121,16 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 				std::cout << string_two << std::endl;*/
 				for (auto abc : s_vector)
 			    {
-					std::cout << abc<<" ";
+					std::cout << abc << " ";
 			    }
 				s_vector.clear();
-			}
+			//}
 
 			
 
 			std::cout << "------------------ " << y << " " << std::endl;
 		}
-		//std::cout << "------------------ " << i << " " << std::endl;
+		
 	}
 	
 

@@ -12,7 +12,7 @@ public:
 	void encode(std::string user,std::string paswd);
 	std::string encoding(std::string paswod);
 	void save_txt();
-	bool check_username();
+	bool check_username(std::string uname);
 
 private:
 	std::string username;

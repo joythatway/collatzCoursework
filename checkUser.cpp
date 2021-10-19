@@ -78,9 +78,15 @@ void check_user_pass::check(std::string user, std::string pwd)
 				if (split == ' ')
 				{
 					password = password + (&split+1);
+					break;
 					//std::cout << password << std::endl;
 				}
+				else
+				{
+					username = username + split;
+				}
 			}
+			/*//!!!
 			for (auto& split1 : oneline)
 			{
 				if (split1 == ' ')
@@ -89,7 +95,7 @@ void check_user_pass::check(std::string user, std::string pwd)
 					//std::cout << password << std::endl;
 				}
 				username = username + split1;
-			}
+			}*/
 			//std::cout << "username is :"<<username << std::endl;
 			//std::cout << "password is :"<<password << std::endl;
 

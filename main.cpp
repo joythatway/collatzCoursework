@@ -5,20 +5,33 @@
 #include "decode.h"
 
 using namespace std;
-
+template<typename T>
+void print(T value)
+{
+	std::cout << value << std::endl;
+}
 void function1()//14/10/2021-14:43--14:45
 {
 	string uName;
 	string pwd;
+	bool tempbool;
 	createUser* crtUser = new createUser;
-	cout << "please input your username:" << endl;
+	print("please input your username:");
 	cin >> uName;
 	//check the username if it exist
-
-	cout << "please input your password:" << endl;
-	cin >> pwd;
-	crtUser->encode(uName, pwd);
-
+	tempbool = crtUser->check_username(uName);
+	if (tempbool==false)
+	{
+		//std::cout << "please use other name ..." << endl;
+		print("please use other name");
+	}
+	else 
+	{
+		cout << "please input your password:" << endl;
+		cin >> pwd;
+		crtUser->encode(uName, pwd);
+	}
+	
 }
 
 void function2()//check-username-password
@@ -84,11 +97,18 @@ void function4()
 int main()
 {
 	int function_number;
-	cout << "please type number to choose function>>>" << endl;
+	/*cout << "please type number to choose function>>>" << endl;
 	cout << "1.register your account" << endl;
 	cout << "2.log in" << endl;
 	cout << "3.Generate password strength analysis file" << endl;
-	cout << "4.Analys password strength analysis file" << endl;
+	cout << "4.Analys password strength analysis file" << endl;*/
+
+	print("please type number to choose function>>>");
+	print("1.register your account");
+	print("2.log in");
+	print("3.Generate password strength analysis file");
+	print("4.Analys password strength analysis file");
+
 	cin >> function_number;
 	switch (function_number) 
 	{
@@ -97,7 +117,7 @@ int main()
 	case 3:function3(); break;
 	case 4:function4(); break;
 	default:
-		cout << "please input valid number !" << endl;
+		print("please input valid number !");
 
 	}
 

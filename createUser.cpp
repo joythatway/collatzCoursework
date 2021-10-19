@@ -4,6 +4,7 @@
 #include <map>
 #include "createUser.h"
 
+
 createUser::createUser()
 {
 	createUser::username = "noname";
@@ -14,12 +15,45 @@ createUser::createUser()
 	//std::cout << username << " and " << password << std::endl;
 }
 
-bool createUser::check_username()
+bool createUser::check_username(std::string uname)
 {
-	//std::ifstream ofs_check_username;
-	//ofs_check_username.open("./UserPass.txt");
+	std::string username_from_user;
+	std::string password_from_user;
+	std::string all;
+	std::string oneline;
+	std::string username;
+	std::string password;
+	std::ifstream ofs_check_username;
+	ofs_check_username.open("./UserPass.txt",std::ios::in);
+	if (ofs_check_username.is_open())
+	{
+		while (getline(ofs_check_username, all, '\n'))
+		{
+			//std::cout << all << std::endl;
+			//getline_counter++;
+			//std::cout << getline_counter<<std::endl;
+			oneline = all;
+			//std::cout << "oneline is :" << oneline << std::endl;
 
-	return true;
+			username = "";
+			//password = "";
+			for (auto& split : oneline)
+			{
+				if (split == ' ')
+				{
+					//password = password + (&split + 1);
+					break;
+					//std::cout << password << std::endl;
+				}
+				else
+				{
+					username = username + split;
+				}
+			}
+			if (uname == username)
+				return false;
+		}
+	}
 }
 void createUser::encode(std::string user,std::string paswd)
 {

@@ -16,6 +16,8 @@ public:
 	char int_to_char(int cha);
 	void write_passcode();
 	void close_passcode();
+	std::string encoding_asciinum(int num);
+	int calcu_asciinum(int i);
 	int tempchar;
 	std::string f_finished_passcode;
 	std::string s_finished_passcode;
@@ -27,6 +29,7 @@ private:
 	std::vector<int> s_vector;
 	std::vector<int> output;
 	std::vector<int> afterResize;
+	int counter_asciinum;
 
 
 };

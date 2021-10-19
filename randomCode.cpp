@@ -15,6 +15,7 @@ randomCode::randomCode()//cons
 {
 	f_finished_passcode = "";
 	s_finished_passcode = "";
+	counter_asciinum = 0;
 	ofs_write.open("./passwordtest.txt", std::ios::out);
 	srand((int)time(0));
 }
@@ -22,7 +23,9 @@ randomCode::randomCode()//cons
 void randomCode::generate_passcode()
 {
 	std::cout << "generate_passcode()" << std::endl;
-	//firstpasscode();
+	counter_asciinum = 0;
+	firstpasscode();
+	counter_asciinum = 0;
 	secondpasscode();
 	close_passcode();
 }
@@ -37,6 +40,12 @@ void randomCode::firstpasscode()//first 10000 passcode
 	int times = 1;
 	int cishu = 0;
 	int length = 0;
+	int ch[10];
+	for (int i = 0; i < 10; i++)
+	{
+		ch[i]= (rand() % (122 - 97 + 1)) + 97;// creat arrays to store 10 lowercase ascii dec;
+		//std::cout << ch[i] << std::endl;//check the 10 lowercase characters
+	}
 	for (cishu = 1; cishu <= 100; cishu++)//第一个100，第二个100，第三个100......
 	{
 		//std::cout << cishu << std::endl;
@@ -46,19 +55,23 @@ void randomCode::firstpasscode()//first 10000 passcode
 			// here to generate random passcode
 			string_one = "";
 			string_two = "";
+			f_finished_passcode = "";
 			for (length = 1; length <= cishu; length++)//length
 			{
-				tempchar=(rand() % (122 - 97 + 1)) + 97;
-				string_one=std::to_string(tempchar);
-				string_two=string_two+string_one;
+				//tempchar=(rand() % (122 - 97 + 1)) + 97;
+				tempchar= (rand() % 9);
+				//string_one=std::to_string(ch[tempchar]);
+				string_two.append(encoding_asciinum(ch[tempchar]));//!!
 
 			}
 			
-			std::cout << string_two << std::endl;
+			counter_asciinum = 0;
+			std::cout << string_two << std::endl;//!!
 			//std::cin.get();
-			f_finished_passcode = encoding(string_two);//encoding ...
-			std::cout <<"encoding :"<< f_finished_passcode << std::endl;
-			write_passcode();
+			//f_finished_passcode = encoding(string_two);//encoding ...//19/10/2021::no need this step, the function is updated now;
+			f_finished_passcode.append(string_two);//!!
+			//std::cout <<"encoding :"<< f_finished_passcode << std::endl;
+			write_passcode();//!!
 
 		}
 
@@ -98,7 +111,8 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 			//std::random_shuffle(s_vector.begin(), s_vector.end());
 			string_two = "";
 			str = "";
-			for (iv = 32; iv <= 132; iv++)
+			s_finished_passcode = "";
+			for (iv = 0; iv <= 255; iv++)
 			{
 				s_vector.push_back(iv);
 			}
@@ -121,8 +135,19 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 				std::cout << string_two << std::endl;*/
 				for (auto abc : s_vector)
 			    {
-					std::cout << abc << " ";
+					//std::cout << abc << " ";//just print every value in vector
+					//std::cout << encoding_asciinum(abc);//print result number after encoding
+					
+					//s_finished_passcode = s_finished_passcode + encoding_asciinum(abc);//write result into string value
+					s_finished_passcode.append(encoding_asciinum(abc));
 			    }
+				counter_asciinum = 0;
+				if (ofs_write)
+				{
+					ofs_write << s_finished_passcode << std::endl;//write encrypted passcode into file
+					//ofs_write.close();
+					std::cout << "finished writing second passcode ..." << std::endl;
+				}
 				s_vector.clear();
 			//}
 
@@ -155,7 +180,7 @@ void randomCode::write_passcode()
 	{
 		ofs_write << f_finished_passcode<< std::endl;
 		//ofs_write.close();
-		std::cout << "finished writing ..." << std::endl;
+		//std::cout << "finished writing ..." << std::endl;
 	}
 	else
 	{
@@ -173,4 +198,32 @@ void randomCode::close_passcode()
 	else {
 		//std::cout << "the file has already close !" << std::endl;
 	}
+}
+
+int randomCode::calcu_asciinum(int i)
+{
+	if (i == 1)
+		return i;
+
+	if (i == 0)
+		return 1;
+
+	if (i % 2 == 0)
+		return i / 2;
+	else
+		return 3 * i + 1;
+}
+std::string randomCode::encoding_asciinum(int num)
+{
+	int tempnum = 0;
+	std::string finished_passcode;
+	tempnum=num + counter_asciinum;
+	
+	while ( tempnum!= 1)
+	{
+		tempnum = calcu_asciinum(tempnum);
+		counter_asciinum++;
+	}
+	finished_passcode = std::to_string(counter_asciinum);
+	return finished_passcode;
 }

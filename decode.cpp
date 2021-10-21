@@ -793,9 +793,9 @@ void decode::decrypt()//try use map
 	int tempresultnum = 0;
 	int offset = 0;
 
-	//while (flag != true)
+	while (flag != true)
 	//for(int cishu=0;cishu<english.length();cishu++)
-	//{
+	{
 
 
 		tempstring = english;
@@ -823,17 +823,15 @@ void decode::decrypt()//try use map
 							offset = tempnum;
 							beginnum += 3;
 						}
-					}
-					else
+					}else
 					{
 						std::cout << "do not find" << std::endl;
 						chioce--;
 					}
 				}
 
-			}
-			else
-			{
+			}else{
+			
 				/*
 				for (int i = 1; i < 255; i++)
 				{
@@ -858,11 +856,11 @@ void decode::decrypt()//try use map
 				}
 				*/
 				chioce--;
-				
 			}
 
 
-		}else if (chioce == 2)
+		} 
+		if (chioce == 2)
 		{
 			//liangwei
 			endnum += beginnum + chioce;
@@ -926,7 +924,7 @@ void decode::decrypt()//try use map
 
 
 		}
-		else if (chioce == 1)
+		if (chioce == 1)
 		{
 			endnum += beginnum + chioce;
 			tempstring = tempstring.substr(beginnum, endnum);
@@ -992,6 +990,6 @@ void decode::decrypt()//try use map
 		}
 
 
-	//}
+	}
 
 }

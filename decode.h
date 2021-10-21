@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <map>
 #include "checkUser.h"
 #include "randomCode.h"
 
@@ -13,6 +14,9 @@ public:
 	int anticollatz(int offset);
 	int anticalcu(int x);
 
+	std::map<int, int>counter_map;
+	void read_map();
+	void decrypt();
 	void arraydecode();
 	void forloopdecode();
 	void baolidecode();

@@ -101,8 +101,9 @@ void function4()
 	//dc->digui(all_the_words,"",13,35);
 	//dc->baolidecode();
 	//dc->pojie();
-	dc->arraydecode();
+	//dc->arraydecode();//!!!
 	//dc->forloopdecode();
+	dc->decrypt();
 }
 int main()
 {

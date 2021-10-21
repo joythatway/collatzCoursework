@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <istream>
+#include <map>
 #include "decode.h"
 
 
@@ -713,4 +715,283 @@ void decode::arraydecode()
 		
 
 	}
+}
+void decode::read_map()//read txt to map
+{
+	std::ifstream read_map;
+	std::string all;
+	int value_int;
+	int counter_int;
+	std::string oneline;
+	std::string value;
+	std::string counter;
+	std::stringstream stream;//this is to use transfer string to int
+	char delim = ' ';
+	int getline_counter = 0;
+	read_map.open("./counter_map.txt", std::ios::in);
+	if (read_map.is_open()) {
+		//std::cout << "open file successed !" << std::endl;
+		while (getline(read_map, all, '\n'))
+		{
+			//std::cout << all << std::endl;
+			getline_counter++;
+			//std::cout << getline_counter<<std::endl;
+			oneline = all;
+			//std::cout << "oneline is :" << oneline << std::endl;
+
+			value = "";
+			counter = "";
+			for (auto& split : oneline)
+			{
+				if (split == ' ')
+				{
+					counter = counter + (&split + 1);
+					break;
+					//std::cout << password << std::endl;
+				}
+				else
+				{
+					value = value + split;
+				}
+
+			}
+			//here to transfer  string to int
+			stream << value;
+			stream >> value_int;
+			stream.clear();
+			stream << counter;
+			stream >> counter_int;
+			counter_map.insert(std::pair<int, int>(value_int, counter_int));
+			stream.clear();
+		}
+		//int aa;
+		//std::cin >> aa;
+		//std::map<int, int>::iterator iter;
+		//iter = counter_map.find(aa);
+		//if (iter != counter_map.end())
+		//	std::cout << "find the value :"<<iter->second <<" the map size is :"<<counter_map.size()<< std::endl;
+		//else
+		//	std::cout << "do not find" << std::endl;
+	}
+}
+//void decode::findvalue()
+//{
+
+//}
+void decode::decrypt()//try use map
+{
+	read_map();
+	std::map<int, int>::iterator iter;
+	std::stringstream stream;
+	flag = false;
+	std::string english = "27322810313331033910211452912207344136146925461033281533271031012815108114101";
+	std::string tempstring = "";
+	int beginnum = 0;
+	int endnum = 0;
+	int tempnum = 0;
+	int outputnum = 0;
+	int tempresultnum = 0;
+	int offset = 0;
+
+	//while (flag != true)
+	//for(int cishu=0;cishu<english.length();cishu++)
+	//{
+
+
+		tempstring = english;
+		int chioce = 3;
+		if (chioce == 3)
+		{
+			//sanwei
+			endnum += beginnum + chioce;
+			tempstring = tempstring.substr(beginnum, endnum);
+			stream << tempstring;
+			stream >> tempnum;
+			if (tempnum < 115 && tempnum > 6 && chioce > 0)
+			{
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							outputnum = i - offset;////////////////////
+							std::cout << outputnum << " ";
+							offset = tempnum;
+							beginnum += 3;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+				}
+
+			}
+			else
+			{
+				/*
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							i = i - offset;
+							std::cout << i << " ";
+							offset = tempnum;
+							beginnum += 3;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+				}
+				*/
+				chioce--;
+				
+			}
+
+
+		}else if (chioce == 2)
+		{
+			//liangwei
+			endnum += beginnum + chioce;
+			tempstring = tempstring.substr(beginnum, endnum);
+			stream << tempstring;
+			stream >> tempnum;
+			if (tempnum < 115 && tempnum > 6 && chioce > 0)
+			{
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							i = i - offset;
+							std::cout << i << " ";
+							offset = tempnum;
+							beginnum += 2;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+
+				}
+			}
+			else
+			{
+				/*
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							i = i - offset;
+							std::cout << i << " ";
+							offset = tempnum;
+							beginnum += 2;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+
+				}
+				*/
+				chioce--;
+				//continue;
+			}
+
+
+		}
+		else if (chioce == 1)
+		{
+			endnum += beginnum + chioce;
+			tempstring = tempstring.substr(beginnum, endnum);
+			stream << tempstring;
+			stream >> tempnum;
+			if (tempnum < 115 && tempnum > 6 && chioce > 0)
+			{
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							i = i - offset;
+							std::cout << i << " ";
+							offset = tempnum;
+							beginnum += 1;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+				}
+			}
+			else
+			{
+				/*
+				for (int i = 1; i < 255; i++)
+				{
+					iter = counter_map.find(i);
+					if (iter != counter_map.end())
+					{
+						std::cout << "find the value :" << iter->second << std::endl;
+						tempresultnum = iter->second;
+						if (tempnum == tempresultnum)
+						{
+							i = i - offset;
+							std::cout << i << " ";
+							offset = tempnum;
+							beginnum += 1;
+						}
+					}
+					else
+					{
+						std::cout << "do not find" << std::endl;
+						chioce--;
+					}
+				}
+				*/
+				chioce--;
+				//continue;
+			}
+
+
+		}
+		else {
+			std::cout << "wulalalala" << std::endl;
+		}
+
+
+	//}
+
 }

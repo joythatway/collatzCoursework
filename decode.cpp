@@ -638,7 +638,9 @@ int decode::Collatz(int singlecha)
 
 void decode::arraydecode()
 {
-	
+	char all_words[13] = { 'A','a','d','e','f','i','l','n','o','r','s','t',' '};// all in 13 cha
+	//int all_word[13] = { 65,97,100,101,102,105,108,110,111,114,115,116, 32 };
+	int all_word[13] = { 65, 32, 102, 105, 101, 110, 97, 100, 108, 111, 114, 115, 116 };
 	std::string tempstring = "";
 	sentc = "";
 	char cha;
@@ -653,11 +655,11 @@ void decode::arraydecode()
 	{
 		for (int i = 0; i < 35; i++)
 		{
-			for (int a = 32; a <= 122; a++)
+			for (int a = 0; a <13; a++)
 			{
 				english = "27322810313331033910211452912207344136146925461033281533271031012815108114101";
 				
-				nextcounter = Collatz(a + offset);//将最终加密数字转为string类型
+				nextcounter = Collatz(all_word[a] + offset);//将最终加密数字转为string类型
 				//finished_password = finished_password + pass;//将每个加密后的字符串联为一个长字符串
 				//offset = counter;
 				tempstring = tempstring + std::to_string(nextcounter);
@@ -671,7 +673,7 @@ void decode::arraydecode()
 				{
 					offset = nextcounter;
 				
-					arraynum[i][a-32] = nextcounter;
+					arraynum[i][1] = nextcounter;
 					//sentc = sentc + tempstring;
 					std::cout << "------------------------- " << sentc << std::endl;
 					std::cout << "---------------------------- " << int_to_char(a) << std::endl;
@@ -690,8 +692,9 @@ void decode::arraydecode()
 				else if (flagnum == 0) 
 				{
 					std::string deletechar;
-					deletechar = arraynum[i][a - 32];
-					arraynum[i][a - 32] = 0;
+					deletechar = arraynum[i][1]+arraynum[i][1];
+					arraynum[i][1] = 0;
+					arraynum[i][1] = 0;
 					i--;
 					sentc = sentc.substr(0, sentc.length() - deletechar.length());
 					//tempstring.clear();

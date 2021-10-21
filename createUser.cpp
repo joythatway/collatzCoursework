@@ -55,7 +55,7 @@ bool createUser::check_username(std::string uname)
 		}
 	}
 }
-void createUser::encode(std::string user,std::string paswd)
+void createUser::encoding(std::string user,std::string paswd)
 {
 	username = user;
 	password = paswd;

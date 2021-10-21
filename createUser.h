@@ -9,8 +9,8 @@ public:
 	int charTransferInt(char cha);
 	int calcu(int i);
 	int collatz(int singlecha);
-	void encode(std::string user,std::string paswd);
-	std::string encoding(std::string paswod);
+	void encoding(std::string user,std::string paswd);//!!!poly
+	std::string encoding(std::string paswod);//
 	void save_txt();
 	bool check_username(std::string uname);
 

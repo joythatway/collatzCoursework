@@ -48,7 +48,7 @@ void check_user_pass::check(std::string user, std::string pwd)
 	//m_pwd;
 	//调用collatz函数计算加密后的密码，并赋给c_password;
 	input_username = user;
-	input_password = encoding(pwd);
+	input_password = encoding(pwd);//
 
 	std::string username_from_user;
 	std::string password_from_user;

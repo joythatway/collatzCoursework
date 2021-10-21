@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string>
 #include "checkUser.h"
 
 
@@ -22,6 +23,7 @@ public:
 	std::string f_finished_passcode;
 	std::string s_finished_passcode;
 	std::fstream ofs_write;
+	int counter_asciinum;
 
 private:
 
@@ -29,7 +31,7 @@ private:
 	std::vector<int> s_vector;
 	std::vector<int> output;
 	std::vector<int> afterResize;
-	int counter_asciinum;
+	//int counter_asciinum;//!!!
 
 
 };

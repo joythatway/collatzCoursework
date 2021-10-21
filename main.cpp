@@ -1,4 +1,5 @@
 #include <iostream>
+#include <any>
 #include "createUser.h"
 #include "checkUser.h"
 #include "randomCode.h"
@@ -29,7 +30,7 @@ void function1()//14/10/2021-14:43--14:45
 	{
 		cout << "please input your password:" << endl;
 		cin >> pwd;
-		crtUser->encode(uName, pwd);
+		crtUser->encoding(uName, pwd);//!!!poly
 	}
 	
 }
@@ -92,11 +93,25 @@ void function3()//generate passcode
 }
 void function4()
 {
+	char all_the_words[13] = { 'A','a','d','e','f','i','l','n','o','r','s','t',' ' };// all in 13 cha
+	const string sentence = "27322810313331033910211452912207344136146925461033281533271031012815108114101";
+	decode* dc = new decode;
+	//dc->decodeSentence(sentence);
 
+	//dc->digui(all_the_words,"",13,35);
+	//dc->baolidecode();
+	//dc->pojie();
 }
 int main()
 {
 	int function_number;
+	int* pt;
+	int** pt2pt;
+	pt = &function_number;
+	pt2pt = &pt;
+
+	//void (*func[4])() = { function1,function2,function3,function4 };
+
 	/*cout << "please type number to choose function>>>" << endl;
 	cout << "1.register your account" << endl;
 	cout << "2.log in" << endl;
@@ -109,8 +124,22 @@ int main()
 	print("3.Generate password strength analysis file");
 	print("4.Analys password strength analysis file");
 
-	cin >> function_number;
-	switch (function_number) 
+	//cin >> function_number;
+	cin >> **pt2pt;
+	cout << "**pt2pt is :";
+	print(**pt2pt);
+	/*
+	if (function_number > 4 || function_number < 1) {
+		print("please input valid number !");
+	}
+	else {
+		func[function_number]();
+	}
+	*/	
+	
+		
+	
+	switch (**pt2pt) //function_number
 	{
 	case 1:function1(); break;
 	case 2:function2(); break;
@@ -120,6 +149,6 @@ int main()
 		print("please input valid number !");
 
 	}
-
+	
 
 }

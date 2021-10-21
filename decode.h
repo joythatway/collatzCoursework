@@ -13,6 +13,8 @@ public:
 	int anticollatz(int offset);
 	int anticalcu(int x);
 
+	void arraydecode();
+	void forloopdecode();
 	void baolidecode();
 	void pojie();
 	void encode();

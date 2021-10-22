@@ -16,6 +16,7 @@ public:
 
 	std::map<int, int>counter_map;
 	void read_map();
+	void readfile();
 	void decrypt();
 	void slicedecode();
 	void arraydecode();
@@ -32,6 +33,7 @@ public:
 	int offset;
 	int tempnum;
 	std::fstream ofs_recur;
+	std::fstream ofs_read;
 
 
 private:

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <istream>
 #include <random>
+#include <time.h>
 #include <map>
 #include "decode.h"
 
@@ -23,6 +24,26 @@ decode::~decode()
 	//	ofs_recur.close();
 	//	//std::cout << "close the file !" << std::endl;
 	//}
+}
+void decode::readfile()
+{
+	ofs_read.open("./passwordtest.txt", std::ios::in);
+
+	std::string username_from_user;
+	std::string all;
+	std::string oneline;
+	std::string username;
+	std::string password;
+	char delim = ' ';
+	int getline_counter = 0;
+	while (getline(ofs_read, all, '\n'))
+	{
+		getline_counter++;
+		oneline = all;
+
+		std::cout << all << std::endl;
+	}
+
 }
 void decode::decodeSentence(const std::string sentence)
 {

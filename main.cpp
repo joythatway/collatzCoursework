@@ -48,9 +48,14 @@ void function2()//check-username-password
 	string check_username;
 	string check_password;
 	int i = 3;
-	
+	//bool exit = check_pwd->open_file();
+	//if (!exit)
+	//	return;
 	cout<<"please input your username:" << endl;
 	cin >> check_username;
+	//if (!check_pwd->check(check_username))
+		//return;
+	
 	cout << "please input password:" << endl;
 	cin >> check_password;
 	//写一个入口函数，传递用户名和密码开始处理
@@ -74,9 +79,9 @@ void function2()//check-username-password
 				check_password = check_pwd->encoding(check_password);
 			}
 		}
-	}else
+	}else if(check_username!=check_pwd->txt_username||check_username!="")
 	{
-		std::cout << "failure" << std::endl;
+		std::cout << "failure: no this username" << std::endl;
 	}
 	if (i < 0)
 		std::cout << "you run out of all chance !!" << std::endl;
@@ -104,6 +109,7 @@ void function4()
 	shared_ptr<decode> dc = make_shared<decode>();
 	//dc->decodeSentence(sentence);
 
+	//dc->readfile();
 	dc->digui(all_the_words,"",13,35);//recursion
 	//dc->baolidecode();
 	//dc->pojie();
@@ -112,6 +118,7 @@ void function4()
 	//dc->decrypt();
 	//dc->slicedecode();
 }
+
 int main()
 {
 	int function_number;
@@ -120,56 +127,49 @@ int main()
 	pt = &function_number;
 	pt2pt = &pt;
 
-	/*void (*f1)();
-	f1 = function1;*/
-	void (*func[5])() = { NULL,function1,function2,function3,function4};
+	void (*func[6])() = { NULL,function1,function2,function3,function4};
 
-	/*cout << "please type number to choose function>>>" << endl;
-	cout << "1.register your account" << endl;
-	cout << "2.log in" << endl;
-	cout << "3.Generate password strength analysis file" << endl;
-	cout << "4.Analys password strength analysis file" << endl;*/
-	
-	/*auto lamda_int2char = [](char a)->int {return a; };
-	print("input any words :");
-	char lam;
-	cin >> lam;
-	print(lamda_int2char(lam));*/
-
-	int stnum = 190627429;
-	putnumber(stnum);
-	print("please type number to choose function>>>");
-	print("1.register your account");
-	print("2.log in");
-	print("3.Generate password strength analysis file");
-	print("4.Analys password strength analysis file");
-	
-
-	//cin >> function_number;
-	cin >> **pt2pt;
-	cout << "**pt2pt is :";
-	print(**pt2pt);
-
-	auto lamdaPrint = []() {cout << "please input valid number !" << endl; };
-	
-	if (**pt2pt > 4 || **pt2pt < 1) {
-		//print("please input valid number !");
-		lamdaPrint();
-	}
-	else {
-		func[**pt2pt]();
-	}
-			
-	/*
-	switch (**pt2pt) //function_number
+	while (1)
 	{
-	case 1:function1(); break;
-	case 2:function2(); break;
-	case 3:function3(); break;
-	case 4:function4(); break;
-	default:
-		print("please input valid number !");
+		int stnum = 190627429;
+		putnumber(stnum);
+		print("please type number to choose function>>>");
+		print("1.register your account");
+		print("2.log in");
+		print("3.Generate password strength analysis file");
+		print("4.Analys password strength analysis file");
+		print("5.Exit");
 
+		cin >> **pt2pt;
+		if (cin.fail() == 1) {
+			print("do not use words");
+			return 0;
+		}
+			
+		auto lamdaPrint = []() {cout << "please input valid number !" << endl; };
+		/*
+		if (**pt2pt > 5 || **pt2pt < 1) {
+			//print("please input valid number !");
+			lamdaPrint();
+		}
+		else*/
+		if (**pt2pt == 5) {
+			//func[**pt2pt]();
+			return 0;
+		}else if(**pt2pt<5&&**pt2pt>=1)
+		{
+			func[**pt2pt]();
+		}
+		else if (**pt2pt > 'a' && **pt2pt<'z' && **pt2pt>'A' && **pt2pt < 'Z')
+		{
+			lamdaPrint();
+		}
+		else {
+			lamdaPrint();
+
+		}
+		cin.get();
+		cin.get();
+		system("cls");
 	}
-	*/
 }

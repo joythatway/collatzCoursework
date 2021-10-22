@@ -14,6 +14,7 @@ private:
 
 public:
 	void check(std::string,std::string);
+	bool check(std::string user);
 	bool open_file();
 	void close_file();
 	check_user_pass();

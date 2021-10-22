@@ -14,16 +14,69 @@ check_user_pass::check_user_pass()//construction function
 	c_username = "";
 	c_password = "";
 }
+bool check_user_pass::check(std::string user)
+{
+	open_file();
+	
+	input_username = user;
+
+	std::string username_from_user;
+	std::string password_from_user;
+	std::string all;
+	std::string oneline;
+	std::string username;
+	std::string password;
+	char delim = ' ';
+	int getline_counter = 0;
+
+	if (cpwd.is_open())
+	{
+		while (getline(cpwd, all, '\n'))
+		{
+			getline_counter++;
+			oneline = all;
+
+			username = "";
+			password = "";
+			for (auto& split : oneline)
+			{
+				if (split == ' ')
+				{
+					break;
+				}
+				else
+				{
+					username = username + split;
+				}
+			}
+
+			if (username != user)
+			{
+				std::cout << "no this username" << std::endl;
+				return false;
+				
+			}
+		}
+	}
+	close_file();
+}
 bool check_user_pass::open_file()
 {
 	cpwd.open("./UserPass.txt",std::ios::in);
-	if (cpwd.is_open()) {
-		//std::cout << "open file successed !" << std::endl;
-		return true;
-	}else {
+	try {
+		if (!cpwd.is_open()) {
+			//std::cout << "open file successed !" << std::endl;
+			throw - 1;
+		}
+	}
+	catch (int err){
+
 		std::cout << "can not open, file may lost !" << std::endl;
 		return false;
 	}
+
+	return true;
+	
 }
 void check_user_pass::close_file()
 {

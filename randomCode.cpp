@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include "randomCode.h"
 
-
 randomCode::randomCode()//cons
 {
 	f_finished_passcode = "";
@@ -19,7 +18,6 @@ randomCode::randomCode()//cons
 	ofs_write.open("./passwordtest.txt", std::ios::out);
 	srand((int)time(0));
 }
-
 void randomCode::generate_passcode()
 {
 	std::cout << "generate_passcode()" << std::endl;
@@ -62,9 +60,7 @@ void randomCode::firstpasscode()//first 10000 passcode
 				tempchar= (rand() % 9);
 				//string_one=std::to_string(ch[tempchar]);
 				string_two.append(encoding_asciinum(ch[tempchar]));//!!
-
-			}
-			
+			}			
 			counter_asciinum = 0;
 			std::cout << string_two << std::endl;//!!
 			//std::cin.get();
@@ -72,14 +68,10 @@ void randomCode::firstpasscode()//first 10000 passcode
 			f_finished_passcode.append(string_two);//!!
 			//std::cout <<"encoding :"<< f_finished_passcode << std::endl;
 			write_passcode();//!!
-
 		}
-
 		std::cout << "------------------------" <<cishu << std::endl;
 		//std::cin.get();
 	}
-	
-
 }
 void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 {
@@ -96,13 +88,6 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 	std::string str;
 	std::stringstream ss;
 	std::vector<int>::iterator itr;
-	/*for (int i = 32; i <= 126; i++)
-	{
-		s_vector.push_back(i);
-	}
-	std::random_shuffle(s_vector.begin(), s_vector.end());*/
-	
-	
 	for (i = 1; i <= 100; i++)//1-100, 101-200, 201-300 ...¼¸°Ù
 	{
 		std::cout << "------------------ " <<"the " << i << "  hunders" << std::endl;
@@ -118,27 +103,9 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 			}
 			std::random_shuffle(s_vector.begin(), s_vector.end());
 			s_vector.resize(i);// use i
-			//for (x = 1; x <= i; x++)//length 1--2--3 ...
-			//{
-				/*std::vector<int>::const_iterator First = s_vector.begin();
-				std::vector<int>::const_iterator End = s_vector.begin()+x;
-				s_vector.assign(First, End);*/
-				/*for (int iv = 32; iv <= 126; iv++)
-				{
-					s_vector.push_back(iv);
-				}
-				std::random_shuffle(s_vector.begin(), s_vector.end());*/
-				//s_vector.resize(x);//??????
-				/*copy(s_vector.begin(), s_vector.end(), std::ostream_iterator<int>(ss, ""));
-				str = ss.str();
-				string_two = string_two + str;
-				std::cout << string_two << std::endl;*/
+
 				for (auto abc : s_vector)
 			    {
-					//std::cout << abc << " ";//just print every value in vector
-					//std::cout << encoding_asciinum(abc);//print result number after encoding
-					
-					//s_finished_passcode = s_finished_passcode + encoding_asciinum(abc);//write result into string value
 					s_finished_passcode.append(encoding_asciinum(abc));
 			    }
 				counter_asciinum = 0;
@@ -149,33 +116,17 @@ void randomCode::secondpasscode()//second 10000 passcode 32-126 printable
 					std::cout << "finished writing second passcode ..." << std::endl;
 				}
 				s_vector.clear();
-			//}
-
-			
-
 			std::cout << "------------------ " << y << " " << std::endl;
-		}
-		
+		}		
 	}
-	
-
-	
-	
-
-
 }
-
 char randomCode::int_to_char(int cha)
 {
 	char output=cha;
 	return output;
 }
-
 void randomCode::write_passcode()
 {
-	/*std::fstream ofs_write;
-	ofs_write.open("./passwordtest.txt", std::ios::app);*/
-
 	if (ofs_write)
 	{
 		ofs_write << f_finished_passcode<< std::endl;
@@ -186,7 +137,6 @@ void randomCode::write_passcode()
 	{
 		std::cout << "open file error !" << std::endl;
 	}
-
 }
 void randomCode::close_passcode()
 {
@@ -199,7 +149,6 @@ void randomCode::close_passcode()
 		//std::cout << "the file has already close !" << std::endl;
 	}
 }
-
 int randomCode::calcu_asciinum(int i)
 {
 	if (i == 1)

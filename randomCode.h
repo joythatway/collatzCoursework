@@ -5,11 +5,9 @@
 #include <string>
 #include "checkUser.h"
 
-
 class randomCode :public check_user_pass
 {
 public:
-
 	randomCode();
 	void generate_passcode();
 	void firstpasscode();
@@ -26,12 +24,9 @@ public:
 	int counter_asciinum;
 
 private:
-
 	std::vector<std::string> f_vector;
 	std::vector<int> s_vector;
 	std::vector<int> output;
 	std::vector<int> afterResize;
 	//int counter_asciinum;//!!!
-
-
 };

@@ -4,15 +4,12 @@
 #include <map>
 #include "createUser.h"
 
-
 createUser::createUser()
 {
 	createUser::username = "noname";
 	createUser::password = "nopassword";
 	createUser::pass = "";
 	createUser::allpass = new std::string;
-
-	//std::cout << username << " and " << password << std::endl;
 }
 
 bool createUser::check_username(std::string uname)
@@ -29,21 +26,13 @@ bool createUser::check_username(std::string uname)
 	{
 		while (getline(ofs_check_username, all, '\n'))
 		{
-			//std::cout << all << std::endl;
-			//getline_counter++;
-			//std::cout << getline_counter<<std::endl;
 			oneline = all;
-			//std::cout << "oneline is :" << oneline << std::endl;
-
 			username = "";
-			//password = "";
 			for (auto& split : oneline)
 			{
 				if (split == ' ')
 				{
-					//password = password + (&split + 1);
 					break;
-					//std::cout << password << std::endl;
 				}
 				else
 				{
@@ -64,7 +53,6 @@ void createUser::encoding(std::string user,std::string paswd)
 	std::cout << user << " and " <<paswd<< std::endl;
 	offset = 0;
 	counter = 0;
-
 	for (auto chr : password)
 	{		
 		tempnum=charTransferInt(chr);//将每个字符char转换为Ascii码		
@@ -79,6 +67,7 @@ void createUser::encoding(std::string user,std::string paswd)
 }
 std::string createUser::encoding(std::string paswod)
 {
+	auto lamda_int2char = [](char a)->int {return a; };//!!!!!!!lamda
 	password = paswod;
 	std::string finished_password;
 	int tempnum = 0;
@@ -86,39 +75,26 @@ std::string createUser::encoding(std::string paswod)
 	//std::cout << " encoding pwd : " << paswod << std::endl;
 	offset = 0;
 	counter = 0;
-
 	for (auto chr : password)
 	{
-		tempnum = charTransferInt(chr);//将每个字符char转换为Ascii码		
+		tempnum = lamda_int2char(chr);//!!!!!!!!lamda
+		//tempnum = charTransferInt(chr);//将每个字符char转换为Ascii码		
 		tempnum = tempnum + offset;
 		//传入Ascii码，计算出到1的步骤counter				
 		pass = std::to_string(collatz(tempnum));//将最终加密数字转为string类型
 		finished_password = finished_password + pass;//将每个加密后的字符串联为一个长字符串
 		offset = counter;
-		//std::cout << finished_password << std::endl;
 	}
 	return finished_password;
 }
 int createUser::charTransferInt(char cha)
 {
 	return cha;
-	/*
-	if (cha >= 48 && cha <= 57)//cha是数字
-	{
-		cha = cha - '0';
-		return cha;
-	}
-	else
-	{
-		return cha;
-	}
-	*/
 }
 int createUser::calcu(int i)
 {
 	if (i == 1)
 		return i;
-
 	if (i % 2 == 0)
 		return i / 2;
 	else
@@ -137,23 +113,15 @@ int createUser::collatz(int singlecha)
 void createUser::save_txt()
 {
 	std::map<std::string, std::string>createMap;
-
-	//将username and allpass写入文件txt
 	std::fstream ofs_write;
-	
 	ofs_write.open("./UserPass.txt", std::ios::app);
-
 	if (ofs_write)
 	{
-		//ofs_write << username << " " << *allpass << '\n';
-			
 		createMap.insert(std::pair<std::string, std::string>(username, *allpass));
 		std::map<std::string, std::string>::iterator iter;
 		for (iter = createMap.begin(); iter != createMap.end(); iter++) {
 				ofs_write << iter->first << ' ' << iter->second << std::endl;
-			//std::cout << iter->first << ' ' << iter->second << endl;
 		}
-	
 		ofs_write.close();
 		std::cout << "finished writing ..." << std::endl;
 	}
@@ -161,5 +129,4 @@ void createUser::save_txt()
 	{
 		std::cout << "open file error !" << std::endl;
 	}
-	//return true;
 }

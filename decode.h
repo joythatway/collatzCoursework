@@ -17,6 +17,7 @@ public:
 	std::map<int, int>counter_map;
 	void read_map();
 	void decrypt();
+	void slicedecode();
 	void arraydecode();
 	void forloopdecode();
 	void baolidecode();

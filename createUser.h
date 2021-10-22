@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 
-
 class createUser
 {
 public:
@@ -13,6 +12,8 @@ public:
 	std::string encoding(std::string paswod);//
 	void save_txt();
 	bool check_username(std::string uname);
+	//auto lamda_int2char = [](int a)->char {return a; };
+	//auto lamda_int2char = [](char a)->int {return a; };
 
 private:
 	std::string username;
@@ -21,10 +22,6 @@ private:
 	std::string* allpass;
 	int offset = 0;
 	int counter = 0;
-	
-
-
-	
 
 protected:
 };
